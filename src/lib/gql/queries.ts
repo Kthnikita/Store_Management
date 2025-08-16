@@ -59,3 +59,24 @@ query Query {
   logoutuser
 }
 `
+export const finduser=gql`
+query Searchuser($cred: String) {
+  searchuser(cred: $cred) {
+    name
+    username
+  }
+}
+`
+export const filtersearch=gql`
+query Searchandfilterprod($sort: String, $title: String, $category: String) {
+  searchandfilterprod(sort: $sort, title: $title, category: $category) {
+    title
+    price
+    category
+    description
+    img_url
+    id
+    stock
+  }
+}
+`

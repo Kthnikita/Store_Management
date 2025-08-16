@@ -7,6 +7,7 @@ import Addtosalebtn from '@/components/Addtosalebtn';
 import Productsalechart from '@/components/productComponents/productsalechart';
 import { DollarSign, Package, Info, BarChart3, Sparkle, Sparkles, Utensils, Cpu, Shirt, Dumbbell, Home, BookOpen, ToyBrick } from 'lucide-react';
 import Updateproduct from '@/components/productComponents/UpdateProduct';
+import Removeprod from '@/components/productComponents/Removeprod';
 type prodtype={
    id :string,
   title: string,
@@ -72,6 +73,7 @@ function Page({ params }: { params: { id: string } }) {
                 {categoryIcons[product.category] || null}
               </p>
               <Updateproduct prod={product}/>
+              <Removeprod id={product.id}/>
             </div>
 
             <div className="mt-4">

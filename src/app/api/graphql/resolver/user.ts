@@ -133,3 +133,26 @@ export async function loginuser(x:any,args:{usercred:string,password:string}){
         return false
       }
     }
+    
+    export async function finduser(x:any,args:any){
+        try{
+            const resp=await prismaclient.user.findMany({
+                where:{
+                    OR:[
+                        {username:{
+                            contains:args.cred,
+                            mode:"insensitive"
+                        }},
+                        {name:{
+                            contains:args.cred,
+                            mode:"insensitive"
+                        }}
+                    ]
+                }
+            })
+            return resp
+        }
+        catch(e:any){
+            return null
+        }
+    }

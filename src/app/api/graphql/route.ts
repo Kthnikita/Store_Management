@@ -5,9 +5,9 @@ import { gql } from "graphql-tag";
 import prismaclient from "@/lib/services/prisma";
 import { cookies } from "next/headers";
 import { generateToken } from "@/lib/services/jwt";
-import { createuser, getalluser, loginuser, logoutuser, removeuser, updateuserprofile, updateuserrole } from "./resolver/user";
+import { createuser, finduser, getalluser, loginuser, logoutuser, removeuser, updateuserprofile, updateuserrole } from "./resolver/user";
 import { getuserfromcookies } from "@/helper";
-import { addproduct, createsale, getallproducts, getproduct, updateproduct } from "./resolver/product";
+import { addproduct, createsale, getallproducts, getproduct, removeprod, searchfilter, updateproduct } from "./resolver/product";
 import logout from "@/components/userComponents/logout";
 
 const typeDefs = gql`
@@ -18,6 +18,8 @@ const typeDefs = gql`
     getallproducts:[product]
     getproduct(id:String):product
    logoutuser:Boolean
+   searchuser(cred:String):[user]
+   searchandfilterprod(title:String,sort:String,category:String):[product]
   }
     type Mutation{
     createuser(name:String!,username:String!,password:String!,email:String!,role:String!):user
@@ -27,6 +29,7 @@ const typeDefs = gql`
     updateproduct(prodid:String!,title:String,description:String,category:String,price:Float,stock:Int,img_url:String):Boolean
     createsale(id:String!,quantity:Int!):Boolean
     removeuser(id:String!):Boolean
+    removeprod(id:String!):Boolean
     }
     type product{
     id :String 
@@ -62,7 +65,9 @@ const resolvers = {
     getalluser:getalluser,
     getallproducts:getallproducts,
     getproduct:getproduct,
-  logoutuser:logoutuser
+  logoutuser:logoutuser,
+  searchuser:finduser,
+   searchandfilterprod:searchfilter
   },
   Mutation:{
     createuser:createuser,
@@ -71,7 +76,8 @@ const resolvers = {
     addproduct:addproduct,
     createsale:createsale,
     removeuser:removeuser,
-    updateproduct:updateproduct
+    updateproduct:updateproduct,
+    removeprod:removeprod
   }
 };
 

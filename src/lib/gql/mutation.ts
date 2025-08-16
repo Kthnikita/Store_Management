@@ -47,3 +47,8 @@ mutation Updateproduct($prodid: String!, $title: String, $stock: Int, $imgUrl: S
   updateproduct(prodid: $prodid, title: $title, stock: $stock, img_url: $imgUrl, price: $price, category: $category, description: $description)
 }
 `
+export const removeProd=gql`
+mutation Removeprod($removeprodId: String!) {
+  removeprod(id: $removeprodId)
+}
+`

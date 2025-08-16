@@ -10,11 +10,13 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { product, productCategory } from "../../../generated/prisma";
 import { Pencil } from "lucide-react";
+import { usercontext } from "../userComponents/Usercontext";
 
 function Updateproduct({prod}:{prod:product}) {
+    const {user}=useContext(usercontext)
   const [title, settitle] = useState(prod.title);
   const [description, setdescription] = useState(prod.description);
   const [category, setcategory] = useState("others");
@@ -48,6 +50,7 @@ function Updateproduct({prod}:{prod:product}) {
       alert("Sorry :/");
     }
   }
+  if(user?.role!=="Manager")return null
   return (
     <div>
       <Dialog.Root>

@@ -2,23 +2,31 @@
 import { allproducts } from "@/lib/gql/queries";
 import gqlclient from "@/lib/services/gql";
 import { useEffect, useState } from "react";
-import { Card, Box, Flex, Text, Avatar } from "@radix-ui/themes";
+import { Card, Box, Flex, Text, Avatar, TextField } from "@radix-ui/themes";
 import Link from "next/link";
 import { product } from "../../../generated/prisma";
 import Updateproduct from "./UpdateProduct";
+import { Search } from "lucide-react";
+import Searchprod from "./Searchprod";
 function Allproducts() {
   const [products, setproducts] = useState<product[] |[]>([]);
-
+  const [loading, setloading] = useState(true);
   useEffect(() => {
     async function getproduct() {
       const data:{getallproducts:product[]} = await gqlclient.request(allproducts);
       setproducts(data?.getallproducts || []);
     }
+    setloading(false);
     getproduct();
-  }, [products]);
 
+  }, []);
+if (loading) return <Text>Loading...</Text>;
   return (
     <div className="space-y-3">
+     <div>
+   <Searchprod prod={products} setprod={setproducts}/>
+
+     </div>
       {products.map((val) => (
         <Box key={val.id}>
           <Card>

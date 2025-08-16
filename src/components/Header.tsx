@@ -5,16 +5,19 @@ import { usercontext } from "./userComponents/Usercontext";
 import { themecontext } from "./Themecontext";
 import { Avatar, Box, Card, Flex, Switch, Text } from "@radix-ui/themes";
 import Logout from "./userComponents/logout";
+import Link from "next/link";
 function Header() {
   const { user } = useContext(usercontext);
   const { isdark, setisdark } = useContext(themecontext);
 
   return (
     <header className="flex justify-between items-center p-4 rounded shadow-blue-600 shadow-2xl">
-      <div className="flex gap-4 items-center">
-		<img src="https://cdn-icons-png.freepik.com/512/9402/9402518.png" alt="" className="h-16 w-16 ml-[20px]"/>
-		<h1 className="text-xl font-bold">Store Management</h1>
+      <Link href="/">
+	  <div className="flex gap-4 items-center">
+		<img src="https://cdn-icons-png.freepik.com/512/9402/9402518.png" alt="" className="h-16 w-16 ml-[20px] "/>
+		<h1 className="text-xl font-bold hidden md:flex">Store Management</h1>
 	  </div>
+	  </Link>
 
       <Box
         maxWidth="240px"

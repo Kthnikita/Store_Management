@@ -96,3 +96,37 @@ export async function addproduct(x:any,args:{title:string,description:string,pri
         return false
       }
     }
+    
+    export async function removeprod(x:any,args:any){
+      try{
+        const resp=await prismaclient.product.delete({
+          where:{
+            id:args.id
+          }
+        })
+        return true
+      }
+      catch(e:any){
+        return false
+      }
+    }
+
+    export async function searchfilter(x:any,args:any){
+      try{
+        const resp=await prismaclient.product.findMany({
+          where:{
+            title:{
+              contains:args.title
+            },
+            category:args.category=="others"?undefined:args.category
+          },
+          orderBy:{
+            price:args.sort=="l-h"?'asc':'desc'
+          }
+        })
+        return resp
+      }
+      catch(e:any){
+        return null
+      }
+    }

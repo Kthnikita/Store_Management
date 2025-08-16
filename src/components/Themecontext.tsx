@@ -6,12 +6,12 @@ import { createContext, ReactNode, useState } from "react"
 import Header from "./Header";
 export const themecontext=createContext<
 {
-    isdark:boolean | null,
-    setisdark:((x:boolean)=>void)|null
+    isdark:boolean,
+    setisdark:(x:boolean)=>void
 
 }
 >({isdark:true,
-    setisdark:null
+    setisdark:()=>{}
 })
 function Themecontext({children}:{children:ReactNode}) {
     const[isdark,setisdark]=useState(true);
