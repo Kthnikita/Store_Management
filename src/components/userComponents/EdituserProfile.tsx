@@ -6,16 +6,18 @@ import gqlclient from '@/lib/services/gql';
 import { user } from '../../../generated/prisma';
 import { usercontext } from './Usercontext';
 import { updateuser } from '@/lib/gql/mutation';
-function Edituser({userid}:{userid:string}) {
+
+function Edituser({userdata}:{userdata:user}) {
     const {user}=useContext(usercontext)
-	const[name,setname]=useState("");
-	const[username,setusername]=useState("");
-	const[email,setemail]=useState("");
-	const[avatar,setavatar]=useState("");
+	const[name,setname]=useState(userdata.name);
+	const[username,setusername]=useState(userdata.username);
+	const[email,setemail]=useState(userdata.email);
+	const[avatar,setavatar]=useState(userdata.avatar);
+
 	async function handelupdateuser() {
 		try{
             const resp:{updateuserprofile:user}=await gqlclient.request(updateuser,{
-                userid,
+                userid:userdata?.id,
                 name,
                 email,
                 username,
@@ -29,12 +31,14 @@ function Edituser({userid}:{userid:string}) {
             alert("showry :/")
         }
 	}
-    if(user?.id!=userid && user?.role!="Admin")return null
+
+    if(user?.id!=userdata.id && user?.role!="Admin")return null
+
   return (
     <div>
       <Dialog.Root>
 	<Dialog.Trigger>
-		<button><Pencil size={20}/></button>
+		<button style={{cursor:"pointer"}}><Pencil size={16}/></button>
 	</Dialog.Trigger>
 
 	<Dialog.Content maxWidth="450px">
@@ -49,6 +53,7 @@ function Edituser({userid}:{userid:string}) {
 					value={name}
 					placeholder="Enter your full name"
 					onChange={(e)=>setname(e.target.value)}
+					style={{cursor:"text"}}
 				/>
 			</label>
 			<label>
@@ -59,6 +64,7 @@ function Edituser({userid}:{userid:string}) {
 					value={email}
 					placeholder="Enter your email"
 					onChange={(e)=>setemail(e.target.value)}
+					style={{cursor:"text"}}
 				/>
 			</label>
 			<label>
@@ -69,6 +75,7 @@ function Edituser({userid}:{userid:string}) {
 					value={username}
 					placeholder="Enter your email"
 					onChange={(e)=>setusername(e.target.value)}
+					style={{cursor:"text"}}
 				/>
 			</label>
 			<label>
@@ -79,6 +86,7 @@ function Edituser({userid}:{userid:string}) {
 					value={avatar}
 					placeholder="Enter your email"
 					onChange={(e)=>setavatar(e.target.value)}
+					style={{cursor:"text"}}
 				/>
 			</label>
 			
@@ -86,12 +94,14 @@ function Edituser({userid}:{userid:string}) {
 
 		<Flex gap="3" mt="4" justify="end">
 			<Dialog.Close>
-				<Button variant="soft" color="gray">
+				<Button variant="soft" color="gray" style={{cursor:"pointer"}}>
 					Cancel
 				</Button>
 			</Dialog.Close>
 			<Dialog.Close>
-				<Button onClick={handelupdateuser}>Update</Button>
+				<Button onClick={handelupdateuser} style={{cursor:"pointer"}}>
+					Update
+				</Button>
 			</Dialog.Close>
 		</Flex>
 	</Dialog.Content>

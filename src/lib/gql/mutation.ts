@@ -52,3 +52,9 @@ mutation Removeprod($removeprodId: String!) {
   removeprod(id: $removeprodId)
 }
 `
+
+export const updaterole=gql`
+mutation Updateuserrole($userid: String!, $role: String!) {
+  updateuserrole(userid: $userid, role: $role)
+}
+`

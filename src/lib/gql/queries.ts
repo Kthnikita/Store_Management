@@ -60,9 +60,11 @@ query Query {
 }
 `
 export const finduser=gql`
-query Searchuser($cred: String) {
-  searchuser(cred: $cred) {
+query Searchuser($role: String, $cred: String) {
+  searchuser(role: $role, cred: $cred) {
     name
+    avatar
+    role
     username
   }
 }

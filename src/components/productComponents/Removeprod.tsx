@@ -1,3 +1,4 @@
+//@ts-nocheck
 "use client";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import React, { useContext } from "react";

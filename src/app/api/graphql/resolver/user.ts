@@ -147,7 +147,8 @@ export async function loginuser(x:any,args:{usercred:string,password:string}){
                             contains:args.cred,
                             mode:"insensitive"
                         }}
-                    ]
+                    ],
+                    role:args.role
                 }
             })
             return resp

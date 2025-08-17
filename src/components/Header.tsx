@@ -1,17 +1,17 @@
+//@ts-nocheck
 'use client'
-
 import { useContext } from "react";
 import { usercontext } from "./userComponents/Usercontext";
 import { themecontext } from "./Themecontext";
-import { Avatar, Box, Card, Flex, Switch, Text } from "@radix-ui/themes";
+import { Avatar, Box, Button, Card, DropdownMenu, Flex, Switch, Text } from "@radix-ui/themes";
 import Logout from "./userComponents/logout";
 import Link from "next/link";
+import Edituser from "./userComponents/EdituserProfile";
 function Header() {
   const { user } = useContext(usercontext);
   const { isdark, setisdark } = useContext(themecontext);
-
   return (
-    <header className="flex justify-between items-center p-4 rounded shadow-blue-600 shadow-2xl">
+    <header className="flex justify-between items-center p-1.5 rounded shadow-blue-600 shadow-2xl md:p-4">
       <Link href="/">
 	  <div className="flex gap-4 items-center">
 		<img src="https://cdn-icons-png.freepik.com/512/9402/9402518.png" alt="" className="h-16 w-16 ml-[20px] "/>
@@ -56,7 +56,18 @@ function Header() {
             </Box>
 		   </Flex>
 			<Flex>
-              <Logout/>
+              <DropdownMenu.Root>
+	<DropdownMenu.Trigger>
+		<Button variant="soft">
+			<DropdownMenu.TriggerIcon />
+		</Button>
+	</DropdownMenu.Trigger>
+	<DropdownMenu.Content>
+		<div className="ml-2 flex gap-2"><Edituser userdata={user}/>Edit</div>
+    <DropdownMenu.Separator />
+		<DropdownMenu.Item ><Logout/></DropdownMenu.Item>
+	</DropdownMenu.Content>
+</DropdownMenu.Root>
 			</Flex>
           </Flex>
         </Card>

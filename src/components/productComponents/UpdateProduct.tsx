@@ -55,7 +55,7 @@ function Updateproduct({prod}:{prod:product}) {
     <div>
       <Dialog.Root>
         <Dialog.Trigger>
-          <button className="hover:text-blue-600"><Pencil size={20}/></button>
+          <button className="hover:text-blue-600 cursor-pointer"><Pencil size={20}/></button>
         </Dialog.Trigger>
 
         <Dialog.Content maxWidth="450px">

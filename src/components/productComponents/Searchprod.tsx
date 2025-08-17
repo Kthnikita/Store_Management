@@ -4,11 +4,10 @@ import {
   Dialog,
   Flex,
   Select,
-  Text,
   TextField,
 } from "@radix-ui/themes";
 import { Funnel, Search } from "lucide-react";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { product } from "../../../generated/prisma";
 import gqlclient from "@/lib/services/gql";
 import { filtersearch } from "@/lib/gql/queries";
@@ -48,14 +47,18 @@ function Searchprod({
         onChange={(e) => setinput(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && getSearchProd()}
       >
-        <TextField.Slot>
+        <TextField.Slot className="cursor-pointer">
           <Search />
         </TextField.Slot>
       </TextField.Root>
-      <Button onClick={getSearchProd}>Search</Button>
+
+      <Button onClick={getSearchProd} style={{cursor:"pointer"}}>
+        Search
+      </Button>
+
       <Dialog.Root>
         <Dialog.Trigger>
-          <button>
+          <button className="cursor-pointer">
             <Funnel />
           </button>
         </Dialog.Trigger>
@@ -71,7 +74,7 @@ function Searchprod({
               value={sortbyprice}
               onValueChange={(value) => setsortbyprice(value)}
             >
-              <Select.Trigger />
+              <Select.Trigger className="cursor-pointer" />
               <Select.Content>
                 <Select.Group>
                   <Select.Label>SortBy Price</Select.Label>
@@ -80,11 +83,12 @@ function Searchprod({
                 </Select.Group>
               </Select.Content>
             </Select.Root>
+
             <Select.Root
               value={category}
               onValueChange={(value) => setcategory(value)}
             >
-              <Select.Trigger />
+              <Select.Trigger className="cursor-pointer" />
               <Select.Content>
                 <Select.Group>
                   <Select.Label>category</Select.Label>
@@ -103,12 +107,14 @@ function Searchprod({
 
           <Flex gap="3" mt="4" justify="end">
             <Dialog.Close>
-              <Button variant="soft" color="gray">
+              <Button variant="soft" color="gray" className="cursor-pointer">
                 Cancel
               </Button>
             </Dialog.Close>
             <Dialog.Close>
-              <Button onClick={getSearchProd}>Apply</Button>
+              <Button onClick={getSearchProd} className="cursor-pointer">
+                Apply
+              </Button>
             </Dialog.Close>
           </Flex>
         </Dialog.Content>

@@ -2,12 +2,20 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { sale } from '../../../generated/prisma';
 
 export default function Productsalechart({sale}:{sale:sale[]}) {
-    const data=sale?.map((val)=>{
-        return({
-            name: new Date(Number(val.createdat)).toLocaleDateString(),
-            quantity:val.quantity
-        })
-    })
+  const grouped: any = {};
+
+sale.forEach((val) => {
+  const date = new Date(Number(val.createdat)).toLocaleDateString();
+
+  if (!grouped[date]) {
+    grouped[date] = { name: date, quantity: 0 };
+  }
+
+  grouped[date].quantity += val.quantity;
+});
+
+const data = Object.values(grouped);
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -27,7 +35,7 @@ export default function Productsalechart({sale}:{sale:sale[]}) {
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="quantity" stroke="#8884d8" activeDot={{ r: data?.length}} />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+   
       </LineChart>
     </ResponsiveContainer>
   );

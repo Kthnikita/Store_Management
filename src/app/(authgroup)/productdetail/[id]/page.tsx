@@ -8,6 +8,8 @@ import Productsalechart from '@/components/productComponents/productsalechart';
 import { DollarSign, Package, Info, BarChart3, Sparkle, Sparkles, Utensils, Cpu, Shirt, Dumbbell, Home, BookOpen, ToyBrick } from 'lucide-react';
 import Updateproduct from '@/components/productComponents/UpdateProduct';
 import Removeprod from '@/components/productComponents/Removeprod';
+import { useRouter } from 'next/navigation';
+
 type prodtype={
    id :string,
   title: string,
@@ -29,7 +31,7 @@ const categoryIcons:any = {
 function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const [product, setProduct] = useState<prodtype | null>(null);
-
+const router=useRouter();
   useEffect(() => {
     async function getProd() {
       const data:{getproduct:prodtype} = await gqlclient.request(getproduct, {
@@ -76,9 +78,11 @@ function Page({ params }: { params: { id: string } }) {
               <Removeprod id={product.id}/>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 flex gap-4">
               <Addtosalebtn product={product} />
+              <button onClick={() => router.back()} className='rounded-md p-1.5 border-2 hover:bg-blue-800'>Go back</button>
             </div>
+             
           </div>
         </div>
       ) : (

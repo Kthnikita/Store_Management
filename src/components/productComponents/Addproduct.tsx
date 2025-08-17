@@ -50,7 +50,7 @@ function Addproduct() {
     <div>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Button>Add product</Button>
+          <Button style={{cursor:"pointer"}}>Add product</Button>
         </Dialog.Trigger>
 
         <Dialog.Content maxWidth="450px">

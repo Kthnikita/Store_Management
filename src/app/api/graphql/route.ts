@@ -18,7 +18,7 @@ const typeDefs = gql`
     getallproducts:[product]
     getproduct(id:String):product
    logoutuser:Boolean
-   searchuser(cred:String):[user]
+   searchuser(cred:String,role:String):[user]
    searchandfilterprod(title:String,sort:String,category:String):[product]
   }
     type Mutation{
