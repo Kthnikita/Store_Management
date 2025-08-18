@@ -12,7 +12,7 @@ function Edituser({userdata}:{userdata:user}) {
 	const[name,setname]=useState(userdata.name);
 	const[username,setusername]=useState(userdata.username);
 	const[email,setemail]=useState(userdata.email);
-	const[avatar,setavatar]=useState(userdata.avatar);
+	const[avatar,setavatar]=useState(userdata.avatar || "");
 
 	async function handelupdateuser() {
 		try{

@@ -40,14 +40,14 @@ function RemoveUser({id}:{id:string}) {
 					Cancel
 				</Button>
 			</AlertDialog.Cancel>
-			<AlertDialog.Action asChild>
-  <button 
+			<AlertDialog.Action>
+  <Button 
     onClick={handleremove} 
     className="px-3 py-1 bg-red-600 text-white rounded"
     style={{cursor:"pointer"}}
   >
     Remove
-  </button>
+  </Button>
 </AlertDialog.Action>
 		</Flex>
 	</AlertDialog.Content>

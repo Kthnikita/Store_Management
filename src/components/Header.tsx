@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 'use client'
 import { useContext } from "react";
 import { usercontext } from "./userComponents/Usercontext";
@@ -9,6 +9,7 @@ import Link from "next/link";
 import Edituser from "./userComponents/EdituserProfile";
 function Header() {
   const { user } = useContext(usercontext);
+  if(!user)return null
   const { isdark, setisdark } = useContext(themecontext);
   return (
     <header className="flex justify-between items-center p-1.5 rounded shadow-blue-600 shadow-2xl md:p-4">
@@ -72,7 +73,7 @@ function Header() {
           </Flex>
         </Card>
       </Box>
-    </header>
+  </header>
   );
 }
 

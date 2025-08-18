@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 "use client";
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import React, { useContext } from "react";
@@ -44,13 +44,13 @@ function Removeprod({ id }: { id: string }) {
                 Cancel
               </Button>
             </AlertDialog.Cancel>
-            <AlertDialog.Action asChild>
-              <button
+            <AlertDialog.Action>
+              <Button
                 onClick={handleremove}
                 className="px-3 py-1 bg-red-600 text-white rounded"
               >
                 Remove
-              </button>
+              </Button>
             </AlertDialog.Action>
           
           </Flex>
